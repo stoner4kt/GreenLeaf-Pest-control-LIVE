@@ -1,0 +1,58 @@
+/* TEAM */
+Developer: GreenLeaf Development Team
+Site: https://www.greenleafpestcontrol.co.za
+Location: Cape Town, Western Cape, South Africa
+
+/* THANKS */
+To all our clients who trust us with their pest control needs
+To the open-source community for amazing tools and libraries
+
+/* SITE */
+Last update: 2024/02/02
+Standards: HTML5, CSS3, JavaScript ES6
+Components: GSAP, Font Awesome, Google Fonts
+Software: VS Code, Git
+Optimizations: SEO, Accessibility (WCAG 2.1), Performance
+Languages: English, Afrikaans
+Doctype: HTML5
+IDE: Visual Studio Code
+
+/* FEATURES */
+- Fully responsive design (mobile-first)
+- SEO optimized for search engines
+- AI/LLM optimized for ChatGPT, Claude, Perplexity
+- Structured data (Schema.org)
+- Google Analytics 4 integration
+- Progressive Web App (PWA) ready
+- Accessibility compliant (WCAG 2.1 AA)
+- Fast loading (optimized images, lazy loading)
+- Browser caching and GZIP compression
+- Security headers implemented
+- Open Graph and Twitter Cards
+- Local SEO optimized for Cape Town
+
+/* SERVICES */
+- Whole House Fumigation
+- Bed Bugs Treatment
+- Cockroach Elimination
+- Rat & Mice Control
+- Ant Extermination
+- Yard Spraying
+- 24/7 Emergency Service
+
+/* CONTACT */
+Phone: +27 76 353 1831
+Email: info@greenleafpestcontrol.co.za
+Website: https://www.greenleafpestcontrol.co.za
+Facebook: https://www.facebook.com/profile.php?id=61585572895546
+Instagram: https://www.instagram.com/greenleaf_pest_control
+
+/* CREDITS */
+Animations: GSAP (GreenSock Animation Platform)
+Icons: Font Awesome
+Fonts: Google Fonts (Poppins, Montserrat)
+Hosting: [Your Hosting Provider]
+Domain: [Your Domain Registrar]
+
+/* THIS FILE IS FOR HUMANS, NOT ROBOTS */
+If you're a robot, please refer to /robots.txt instead :)

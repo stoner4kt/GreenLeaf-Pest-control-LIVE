@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | GreenLeaf Pest Control</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐜</text></svg>">
+    <style>
+        /* ─── Page Hero ─── */
+        .policy-hero {
+            padding: 160px 5% 70px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .policy-hero::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+            pointer-events: none;
+        }
+        .policy-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            pointer-events: none;
+        }
+        .policy-hero h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .policy-hero p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.05rem;
+            max-width: 620px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .policy-hero .policy-meta {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .policy-meta span {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .policy-meta i {
+            color: var(--secondary-color);
+        }
+
+        /* ─── Body Wrapper ─── */
+        .policy-body {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 70px 5% 90px;
+        }
+
+        /* ─── Table of Contents ─── */
+        .toc {
+            background: #fff;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 32px 36px;
+            margin-bottom: 56px;
+            box-shadow: var(--shadow);
+        }
+        .toc h3 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toc h3 i {
+            color: var(--primary-color);
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            margin-bottom: 9px;
+        }
+        .toc a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.93rem;
+            transition: var(--transition);
+        }
+        .toc a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* ─── Policy Sections ─── */
+        .policy-section {
+            margin-bottom: 48px;
+        }
+        .policy-section h2 {
+            font-size: 1.45rem;
+            color: var(--primary-dark);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .policy-section h2 .section-num {
+            background: var(--primary-color);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .policy-section p {
+            color: var(--gray-color);
+            font-size: 0.93rem;
+            line-height: 1.85;
+            margin-bottom: 14px;
+        }
+        .policy-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 14px;
+        }
+        .policy-section ul li {
+            color: var(--gray-color);
+            font-size: 0.93rem;
+            line-height: 1.7;
+            padding: 7px 0 7px 24px;
+            position: relative;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .policy-section ul li:last-child {
+            border-bottom: none;
+        }
+        .policy-section ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        /* ─── Highlighted Info Box ─── */
+        .info-box {
+            background: #f0faf3;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            padding: 22px 24px;
+            margin: 24px 0;
+        }
+        .info-box p {
+            margin-bottom: 0 !important;
+            color: var(--dark-color) !important;
+            font-size: 0.92rem !important;
+        }
+        .info-box .info-box-title {
+            font-weight: 600;
+            color: var(--primary-dark) !important;
+            margin-bottom: 8px !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-box .info-box-title i {
+            color: var(--primary-color);
+        }
+
+        /* ─── Insurance Callout ─── */
+        .insurance-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+            border: 1px solid #f8c300;
+            border-radius: var(--border-radius);
+            padding: 28px 28px;
+            margin: 28px 0;
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+        }
+        .insurance-box .insurance-icon {
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .insurance-box .insurance-text p {
+            color: var(--dark-color) !important;
+            margin-bottom: 6px !important;
+        }
+        .insurance-box .insurance-text .insurance-title {
+            font-weight: 700;
+            font-size: 1rem !important;
+            color: var(--primary-dark) !important;
+        }
+
+        /* ─── Contact Card at bottom ─── */
+        .contact-card {
+            background: var(--primary-dark);
+            color: #fff;
+            border-radius: var(--border-radius);
+            padding: 36px 40px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        .contact-card .contact-card-text {
+            flex: 1;
+            min-width: 240px;
+        }
+        .contact-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .contact-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        .contact-card .contact-card-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .contact-card .contact-card-details a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        .contact-card .contact-card-details a:hover {
+            color: var(--secondary-color);
+        }
+        .contact-card .contact-card-details i {
+            color: var(--secondary-color);
+            width: 16px;
+            text-align: center;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .policy-hero h1 { font-size: 2rem; }
+            .policy-hero { padding: 140px 5% 50px; }
+            .policy-body { padding: 45px 5% 70px; }
+            .toc { padding: 24px 22px; }
+            .insurance-box { flex-direction: column; gap: 16px; }
+            .contact-card { padding: 28px 24px; flex-direction: column; gap: 24px; }
+        }
+        @media (max-width: 480px) {
+            .policy-hero h1 { font-size: 1.7rem; }
+            .policy-meta { gap: 16px; flex-direction: column; align-items: center; }
+            .policy-section h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-image">
+                    <img src="images/logo.png" alt="GreenLeaf Pest Control Logo" class="logo-img">
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="privacy-policy.html" class="nav-link">Privacy Policy</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="policy-hero">
+        <h1>Privacy Policy</h1>
+        <p>We are committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data in accordance with the Protection of Personal Information Act (POPIA).</p>
+        <div class="policy-meta">
+            <span><i class="fas fa-calendar-alt"></i> Last Updated: 1 January 2025</span>
+            <span><i class="fas fa-file-alt"></i> Effective: 1 January 2025</span>
+            <span><i class="fas fa-shield-alt"></i> POPIA Compliant</span>
+        </div>
+    </section>
+
+    <!-- Policy Body -->
+    <div class="policy-body">
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h3><i class="fas fa-list"></i> Table of Contents</h3>
+            <ol>
+                <li><a href="#who-we-are">Who We Are</a></li>
+                <li><a href="#info-we-collect">Personal Information We Collect</a></li>
+                <li><a href="#how-we-collect">How We Collect Your Information</a></li>
+                <li><a href="#why-we-collect">Why We Collect Your Information</a></li>
+                <li><a href="#legal-basis">Legal Basis for Processing</a></li>
+                <li><a href="#how-we-use">How We Use Your Information</a></li>
+                <li><a href="#sharing">Sharing of Your Information</a></li>
+                <li><a href="#insurance">Public Liability Insurance</a></li>
+                <li><a href="#storage">Storage &amp; Security of Your Information</a></li>
+                <li><a href="#retention">Retention of Your Information</a></li>
+                <li><a href="#your-rights">Your Rights Under POPIA</a></li>
+                <li><a href="#cookies">Cookies &amp; Website Tracking</a></li>
+                <li><a href="#children">Children's Privacy</a></li>
+                <li><a href="#third-party">Third-Party Links</a></li>
+                <li><a href="#changes">Changes to This Policy</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ol>
+        </nav>
+
+        <!-- 1 -->
+        <section class="policy-section" id="who-we-are">
+            <h2><span class="section-num">1</span> Who We Are</h2>
+            <p>GreenLeaf Pest Control is a professional pest elimination company registered and operating within South Africa. We provide a full range of residential and commercial pest control services, including whole-house fumigation, bed bug treatment, cockroach elimination, rodent control, ant extermination, and yard spraying.</p>
+            <p>For the purposes of this Privacy Policy, "we," "us," or "our" refers to GreenLeaf Pest Control and any subsidiaries or affiliated entities. "You" or "your" refers to any individual whose personal information we collect or process — including customers, prospective customers, website visitors, or any other person who interacts with our business.</p>
+            <div class="info-box">
+                <p class="info-box-title"><i class="fas fa-building"></i> Company Details</p>
+                <p><strong>Company Name:</strong> GreenLeaf Pest Control<br>
+                <strong>Service Area:</strong> Greater Cape Town &amp; Surrounding Areas<br>
+                <strong>Email:</strong> info@greenleafpestcontrol.co.za<br>
+                <strong>Phone:</strong> 076 353 1831</p>
+            </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="policy-section" id="info-we-collect">
+            <h2><span class="section-num">2</span> Personal Information We Collect</h2>
+            <p>We only collect personal information that is necessary for providing our pest control services, processing your requests, and maintaining a professional relationship with you. The types of personal information we may collect include:</p>
+            <ul>
+                <li><strong>Identity Information:</strong> Full name, date of birth (where required for regulatory compliance).</li>
+                <li><strong>Contact Information:</strong> Email address, phone number, mobile number.</li>
+                <li><strong>Address Information:</strong> Full residential or business address including street, city, postal code, and province — required to schedule and carry out pest control treatments.</li>
+                <li><strong>Service Information:</strong> The specific pest control service(s) you have requested or enquired about, treatment history, and any details about the nature of your pest problem.</li>
+                <li><strong>Payment Information:</strong> Billing details necessary to process payment for services rendered. We do not store full credit card numbers.</li>
+                <li><strong>Communication Records:</strong> Records of correspondence between you and us, including emails, phone calls, and form submissions.</li>
+                <li><strong>Technical Information:</strong> When you use our website, we may collect your IP address, browser type, device information, and pages visited — for the sole purpose of improving site performance.</li>
+            </ul>
+        </section>
+
+        <!-- 3 -->
+        <section class="policy-section" id="how-we-collect">
+            <h2><span class="section-num">3</span> How We Collect Your Information</h2>
+            <p>We collect personal information through the following channels:</p>
+            <ul>
+                <li><strong>Website Forms:</strong> When you submit a quote request, contact form, or any other online form on our website.</li>
+                <li><strong>Phone Calls:</strong> When you contact us by phone to enquire about or book a service.</li>
+                <li><strong>Email:</strong> When you send us an email with questions or service requests.</li>
+                <li><strong>In Person:</strong> When our technicians visit your property, we may note details relevant to the service being provided.</li>
+                <li><strong>Automatic Collection:</strong> Certain technical data (such as IP address and browser information) is collected automatically when you visit our website.</li>
+            </ul>
+        </section>
+
+        <!-- 4 -->
+        <section class="policy-section" id="why-we-collect">
+            <h2><span class="section-num">4</span> Why We Collect Your Information</h2>
+            <p>We collect personal information solely for legitimate business purposes directly tied to the delivery of our pest control services. We do not collect information "just in case" — every piece of data we gather has a specific, defined purpose.</p>
+        </section>
+
+        <!-- 5 -->
+        <section class="policy-section" id="legal-basis">
+            <h2><span class="section-num">5</span> Legal Basis for Processing</h2>
+            <p>Our processing of your personal information is grounded in the following lawful bases under POPIA:</p>
+            <ul>
+                <li><strong>Consent:</strong> Where you have voluntarily provided your information — for example, by submitting a quote request form on our website.</li>
+                <li><strong>Contractual Necessity:</strong> To fulfil the terms of a service agreement — for instance, collecting your address so we can schedule and deliver a pest treatment.</li>
+                <li><strong>Legitimate Interest:</strong> To protect the security of our business, improve our services, and communicate relevant information — provided our interests do not override your rights to privacy.</li>
+                <li><strong>Legal Obligation:</strong> To comply with applicable South African laws and regulations, including tax, health and safety, and environmental requirements.</li>
+            </ul>
+        </section>
+
+        <!-- 6 -->
+        <section class="policy-section" id="how-we-use">
+            <h2><span class="section-num">6</span> How We Use Your Information</h2>
+            <p>Your personal information may be used for the following purposes:</p>
+            <ul>
+                <li>Processing and fulfilling your pest control service requests.</li>
+                <li>Scheduling technician visits and coordinating service delivery.</li>
+                <li>Sending you confirmation, invoices, and follow-up communications related to services.</li>
+                <li>Responding to your enquiries, complaints, or feedback.</li>
+                <li>Maintaining records for legal, tax, and regulatory compliance.</li>
+                <li>Monitoring and improving the quality of our services.</li>
+                <li>Ensuring the health and safety of our technicians and your household.</li>
+                <li>Sending you occasional service reminders or promotional offers — only where you have given consent to receive them.</li>
+            </ul>
+            <div class="info-box">
+                <p class="info-box-title"><i class="fas fa-lock"></i> Our Commitment</p>
+                <p>We will never sell, rent, or trade your personal information to third parties for marketing or any other purpose. Your information belongs to you.</p>
+            </div>
+        </section>
+
+        <!-- 7 -->
+        <section class="policy-section" id="sharing">
+            <h2><span class="section-num">7</span> Sharing of Your Information</h2>
+            <p>We do not share your personal information with third parties unless it is strictly necessary to deliver our services or required by law. Where we do share information, it is limited to the following scenarios:</p>
+            <ul>
+                <li><strong>Service Providers:</strong> We may share information with trusted third-party providers — such as payment processors, scheduling software, or communication platforms — who assist us in delivering our services. These parties are bound by confidentiality agreements and are not permitted to use your data for any purpose other than supporting our operations.</li>
+                <li><strong>Insurance Providers:</strong> In the event of a claim related to our public liability insurance, we may need to share relevant details with our insurer to process and resolve the matter.</li>
+                <li><strong>Legal or Regulatory Bodies:</strong> We may disclose your information if required to do so by law, court order, or a legitimate request from a government or regulatory authority.</li>
+                <li><strong>Emergency Situations:</strong> If sharing information is necessary to protect your life, health, or safety, or that of our technicians or third parties, we may do so without prior consent.</li>
+            </ul>
+        </section>
+
+        <!-- 8 -->
+        <section class="policy-section" id="insurance">
+            <h2><span class="section-num">8</span> Public Liability Insurance</h2>
+            <p>GreenLeaf Pest Control holds comprehensive public liability insurance. This coverage is in place to protect both you and us in the event of any accidental damage, injury, or loss that may occur as a result of our pest control activities on or around your property.</p>
+            <div class="insurance-box">
+                <div class="insurance-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="insurance-text">
+                    <p class="insurance-title">We Are Fully Insured</p>
+                    <p>Our public liability insurance covers all work carried out by GreenLeaf Pest Control technicians, including fumigation, spraying, and any other treatments performed at your premises. You can have full confidence that our services are backed by appropriate financial protection.</p>
+                </div>
+            </div>
+            <p>In the event that a claim needs to be made under our public liability insurance, we may need to collect or share certain details about the incident — including your personal information, property details, and a description of the event. This is solely to facilitate a fair and timely resolution of the claim, and any information shared with our insurer is handled in accordance with their own privacy obligations.</p>
+            <p>If you have any questions about our insurance cover or need to report an incident, please contact us directly at <strong>info@greenleafpestcontrol.co.za</strong> or call <strong>076 353 1831</strong>. We will guide you through the process step by step.</p>
+        </section>
+
+        <!-- 9 -->
+        <section class="policy-section" id="storage">
+            <h2><span class="section-num">9</span> Storage &amp; Security of Your Information</h2>
+            <p>We take the security of your personal information seriously. We implement appropriate technical and organisational measures to protect your data from unauthorised access, disclosure, alteration, or destruction. These measures include:</p>
+            <ul>
+                <li>Secure storage systems with access controls limited to authorised personnel only.</li>
+                <li>Encryption of sensitive data during transmission and at rest where applicable.</li>
+                <li>Regular internal reviews of our security practices and data handling procedures.</li>
+                <li>Staff training on data protection responsibilities and best practices.</li>
+            </ul>
+            <p>While we do everything in our power to protect your information, no method of electronic transmission or storage is 100% secure. In the unlikely event of a data breach, we will notify you and the relevant authorities as required under POPIA.</p>
+        </section>
+
+        <!-- 10 -->
+        <section class="policy-section" id="retention">
+            <h2><span class="section-num">10</span> Retention of Your Information</h2>
+            <p>We retain your personal information only for as long as it is necessary to fulfil the purpose for which it was collected, or as required by South African law. Specifically:</p>
+            <ul>
+                <li><strong>Active Customers:</strong> Your information is retained for the duration of your service relationship with us, plus a period of up to <strong>5 years</strong> after your last transaction — for tax, legal, and record-keeping purposes.</li>
+                <li><strong>Prospective Customers:</strong> If you submitted an enquiry but did not proceed with a service, we retain your information for up to <strong>12 months</strong>, after which it will be securely deleted.</li>
+                <li><strong>Insurance &amp; Legal Records:</strong> Any records related to incidents, claims, or legal matters may be retained for longer, as required by our insurer or applicable legislation.</li>
+            </ul>
+            <p>Once the retention period has passed, your information will be securely deleted or anonymised in accordance with best practice.</p>
+        </section>
+
+        <!-- 11 -->
+        <section class="policy-section" id="your-rights">
+            <h2><span class="section-num">11</span> Your Rights Under POPIA</h2>
+            <p>As a data subject under the Protection of Personal Information Act (Act 4 of 2013), you have the following rights with respect to your personal information held by us:</p>
+            <ul>
+                <li><strong>Right of Access:</strong> You may request access to the personal information we hold about you, including the purpose for which it is being processed.</li>
+                <li><strong>Right to Rectification:</strong> If you believe any of your personal information is inaccurate or incomplete, you may request that we correct or update it.</li>
+                <li><strong>Right to Erasure (Deletion):</strong> You may request the deletion of your personal information, provided it is not required for legal, regulatory, or contractual purposes.</li>
+                <li><strong>Right to Object:</strong> You may object to the processing of your personal information if you believe it is being used in a way that is inconsistent with your rights or the provisions of POPIA.</li>
+                <li><strong>Right to Withdraw Consent:</strong> Where your information is being processed on the basis of your consent, you may withdraw that consent at any time — without affecting the lawfulness of processing that took place before the withdrawal.</li>
+                <li><strong>Right to Lodge a Complaint:</strong> If you are unsatisfied with how we have handled your personal information, you may lodge a complaint with the <strong>Information Regulator of South Africa</strong>.</li>
+            </ul>
+            <div class="info-box">
+                <p class="info-box-title"><i class="fas fa-info-circle"></i> Information Regulator</p>
+                <p>The Information Regulator is the authority responsible for overseeing compliance with POPIA in South Africa. Complaints can be lodged at:<br><strong>Website:</strong> www.inforegulator.org.za<br><strong>Email:</strong> complaints@inforegulator.org.za</p>
+            </div>
+            <p>To exercise any of the above rights, please contact us in writing at <strong>info@greenleafpestcontrol.co.za</strong>. We will respond to your request within a reasonable timeframe, and at no cost to you.</p>
+        </section>
+
+        <!-- 12 -->
+        <section class="policy-section" id="cookies">
+            <h2><span class="section-num">12</span> Cookies &amp; Website Tracking</h2>
+            <p>Our website may use cookies — small text files stored on your device — to enhance your browsing experience and help us understand how our site is being used. The types of cookies we may use include:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for the website to function properly. These cannot be disabled.</li>
+                <li><strong>Performance Cookies:</strong> Help us understand how visitors interact with our site, so we can improve it. No personally identifiable information is collected.</li>
+                <li><strong>Preference Cookies:</strong> Allow the website to remember your choices, such as language or display preferences.</li>
+            </ul>
+            <p>We do not use cookies to track you across other websites or to build a profile for targeted advertising. If you wish to disable cookies, you can do so through your browser settings — though this may affect certain features of our website.</p>
+        </section>
+
+        <!-- 13 -->
+        <section class="policy-section" id="children">
+            <h2><span class="section-num">13</span> Children's Privacy</h2>
+            <p>Our website and services are not directed at children under the age of 18. We do not knowingly collect personal information from minors. If you believe that we have inadvertently collected information from a child, please contact us immediately so that we can delete it as quickly as possible.</p>
+        </section>
+
+        <!-- 14 -->
+        <section class="policy-section" id="third-party">
+            <h2><span class="section-num">14</span> Third-Party Links</h2>
+            <p>Our website may contain links to third-party websites or platforms — such as social media accounts or partner sites. These external sites are not owned or operated by GreenLeaf Pest Control and are governed by their own privacy policies. We encourage you to review those policies before submitting any personal information on their platforms. We are not responsible for the privacy practices of any third-party website.</p>
+        </section>
+
+        <!-- 15 -->
+        <section class="policy-section" id="changes">
+            <h2><span class="section-num">15</span> Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, services, or legal requirements. Any updates will be posted on this page with a revised "Last Updated" date. We encourage you to review this policy periodically.</p>
+            <p>If we make any material changes to the way we collect or use your personal information, we will notify you — either through an update on this page or by sending you a direct communication, depending on the nature of the change.</p>
+        </section>
+
+        <!-- 16 -->
+        <section class="policy-section" id="contact-us">
+            <h2><span class="section-num">16</span> Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or the way we handle your personal information, please do not hesitate to reach out to us. We are committed to being transparent and responsive.</p>
+
+            <div class="contact-card">
+                <div class="contact-card-text">
+                    <h3>Get In Touch</h3>
+                    <p>Our team is here to help with any privacy-related questions or requests you may have.</p>
+                </div>
+                <div class="contact-card-details">
+                    <a href="mailto:info@greenleafpestcontrol.co.za"><i class="fas fa-envelope"></i> info@greenleafpestcontrol.co.za</a>
+                    <a href="tel:+27763531831"><i class="fas fa-phone"></i>076 353 1831</a>
+                    <a href="index.html#contact"><i class="fas fa-file-alt"></i> Submit a Request Online</a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- end policy-body -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                    <div class="logo-image">
+                        <img src="images/logo.png" alt="GreenLeaf Pest Control Logo" class="logo-img">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-services">
+                <h4>Our Services</h4>
+                <ul>
+                    <li>House Fumigation</li>
+                    <li>Bed Bugs Treatment</li>
+                    <li>Cockroach Control</li>
+                    <li>Rodent Removal</li>
+                    <li>Ant Extermination</li>
+                    <li>Yard Spraying</li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +27 123 456 7890</p>
+                <p><i class="fas fa-envelope"></i> info@greenleafpestcontrol.co.za</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="footer-certifications">
+            <h4>Our Certifications &amp; Accreditations</h4>
+            <div class="certifications-grid">
+                <div class="cert-item">
+                    <img data-src="images/cert1.jpg" alt="Certification 1" class="cert-img lazy-load">
+                </div>
+                <div class="cert-item">
+                    <img data-src="images/cert2.jpg" alt="Certification 2" class="cert-img lazy-load">
+                </div>
+                <div class="cert-item">
+                    <img data-src="images/cert3.jpg" alt="Certification 3" class="cert-img lazy-load">
+                </div>
+                <div class="cert-item">
+                    <img data-src="images/cert4.jpg" alt="Certification 4" class="cert-img lazy-load">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 GreenLeaf Pest Control. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Navbar JS (hamburger toggle) -->
+    <script>
+        (function () {
+            var hamburger = document.querySelector('.hamburger');
+            var navMenu   = document.querySelector('.nav-menu');
+            var navLinks  = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', function () {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            navLinks.forEach(function (link) {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Lazy-load cert images
+            var lazyImgs = document.querySelectorAll('img[data-src]');
+            var observer = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var img = entry.target;
+                        img.src = img.getAttribute('data-src');
+                        img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                        obs.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '50px' });
+            lazyImgs.forEach(function (img) { observer.observe(img); });
+        })();
+    </script>
+
+</body>
+</html>

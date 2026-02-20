@@ -1,0 +1,66 @@
+# robots.txt for GreenLeaf Pest Control
+# https://www.greenleafpestcontrol.co.za/robots.txt
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Allow crawling of images for Google Images
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Allow crawling for all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI Crawlers - Allow for better AI/LLM optimization
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Crawl-delay for less aggressive bots
+User-agent: *
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.greenleafpestcontrol.co.za/sitemap.xml
+
+# Note: Replace www.greenleafpestcontrol.co.za with your actual domain

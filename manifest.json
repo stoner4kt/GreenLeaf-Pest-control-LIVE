@@ -1,0 +1,68 @@
+{
+    "name": "GreenLeaf Pest Control",
+    "short_name": "GreenLeaf",
+    "description": "Professional pest control services in Cape Town. Expert fumigation, bed bugs, cockroach, rat & ant elimination. 24/7 emergency service.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2a6e3f",
+    "theme_color": "#2a6e3f",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "images/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "images/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["business", "lifestyle"],
+    "lang": "en-ZA",
+    "dir": "ltr",
+    "scope": "/",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name": "Get Quote",
+            "short_name": "Quote",
+            "description": "Request a free pest control quote",
+            "url": "/#contact",
+            "icons": [
+                {
+                    "src": "images/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Our Services",
+            "short_name": "Services",
+            "description": "View pest control services",
+            "url": "/#services",
+            "icons": [
+                {
+                    "src": "images/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Contact Us",
+            "short_name": "Contact",
+            "description": "Contact GreenLeaf Pest Control",
+            "url": "/#contact",
+            "icons": [
+                {
+                    "src": "images/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/</loc>
+        <lastmod>2026-02-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://www.greenleafpestcontrol.co.za/images/logo.png</image:loc>
+            <image:title>GreenLeaf Pest Control Logo</image:title>
+            <image:caption>Professional pest control services in Cape Town</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Services Section -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/#services</loc>
+        <lastmod>2024-02-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://www.greenleafpestcontrol.co.za/images/ants.jpeg</image:loc>
+            <image:title>Pest Control Services</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://www.greenleafpestcontrol.co.za/images/cockroaches.jpeg</image:loc>
+            <image:title>Cockroach Elimination Service</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://www.greenleafpestcontrol.co.za/images/rats.jpeg</image:loc>
+            <image:title>Rodent Control Service</image:title>
+        </image:image>
+    </url>
+    
+    <!-- About Section -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/#about</loc>
+        <lastmod>2024-02-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Contact Section -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/#contact</loc>
+        <lastmod>2024-02-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Privacy Policy -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/privacy-policy.html</loc>
+        <lastmod>2024-02-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- CSS File (for completeness) -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/style.css</loc>
+        <lastmod>2024-02-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+    </url>
+    
+    <!-- JavaScript File (for completeness) -->
+    <url>
+        <loc>https://www.greenleafpestcontrol.co.za/script.js</loc>
+        <lastmod>2024-02-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+    </url>
+    
+</urlset>

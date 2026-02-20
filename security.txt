@@ -1,0 +1,20 @@
+# Our security address
+Contact: mailto:security@greenleafpestcontrol.co.za
+Contact: mailto:info@greenleafpestcontrol.co.za
+
+# Our security policy
+Preferred-Languages: en
+
+# Our PGP key
+Encryption: https://www.greenleafpestcontrol.co.za/pgp-key.txt
+
+Acknowledgments: https://www.greenleafpestcontrol.co.za/security-acknowledgments.html
+
+# Expiration date (1 year from February 2024)
+Expires: 2025-02-02T00:00:00.000Z
+
+# Policy
+Policy: https://www.greenleafpestcontrol.co.za/security-policy.html
+
+# We appreciate responsible disclosure
+Hiring: https://www.greenleafpestcontrol.co.za/#contact
