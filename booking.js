@@ -61,7 +61,10 @@
   }
 
   function toDateKey(date) {
-    return date.toISOString().slice(0, 10);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   function buildCalendarDays() {
@@ -279,14 +282,18 @@
 
       const bookingResult = await callEdgeFunction('create-booking', bookingPayload);
 
-      await callEdgeFunction('send-confirmation-email', {
-        booking_id: bookingResult.booking.id,
-        full_name: bookingResult.booking.full_name,
-        email: bookingResult.booking.email,
-        service_type: bookingResult.booking.service_type,
-        booking_date: bookingResult.booking.booking_date,
-        booking_time: bookingResult.booking.booking_time
-      });
+      try {
+        await callEdgeFunction('send-confirmation-email', {
+          booking_id: bookingResult.booking.id,
+          full_name: bookingResult.booking.full_name,
+          email: bookingResult.booking.email,
+          service_type: bookingResult.booking.service_type,
+          booking_date: bookingResult.booking.booking_date,
+          booking_time: bookingResult.booking.booking_time
+        });
+      } catch (emailError) {
+        console.warn('Booking created but confirmation email failed.', emailError);
+      }
 
       window.location.href = '/thank-you.html';
     } catch (error) {
