@@ -1558,3 +1558,154 @@ h1, h2, h3, h4 {
     background-color: var(--primary-color) !important;
     color: white;
 }
+
+/* Booking UI */
+.contact-page {
+    padding: 140px 20px 40px;
+}
+
+.contact-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-section h1 {
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.contact-section > p {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+}
+
+.booking-alert {
+    display: none;
+    border-radius: var(--border-radius);
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.booking-alert.success,
+.booking-alert.error,
+.booking-alert.warning {
+    display: block;
+}
+
+.booking-alert.success {
+    background: #eaf9ef;
+    color: #216e3b;
+    border: 1px solid #bce3c8;
+}
+
+.booking-alert.error {
+    background: #fff0f0;
+    color: #8f1f1f;
+    border: 1px solid #f3baba;
+}
+
+.booking-alert.warning {
+    background: #fff8e8;
+    color: #8c6414;
+    border: 1px solid #f1d39a;
+}
+
+.booking-calendar {
+    border: 1px solid #d9e6dd;
+    border-radius: var(--border-radius);
+    padding: 18px;
+    margin-bottom: 22px;
+    background: #fff;
+}
+
+.booking-calendar h2 {
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+}
+
+.calendar-help {
+    color: var(--gray-color);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.calendar-days,
+.time-slots {
+    display: grid;
+    gap: 10px;
+}
+
+.calendar-days {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    margin-bottom: 18px;
+}
+
+.time-slots {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.calendar-day,
+.time-slot {
+    border: 1px solid #d4ddd7;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.calendar-day:hover,
+.time-slot:hover {
+    border-color: var(--primary-color);
+}
+
+.calendar-day.selected,
+.time-slot.selected {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+
+.time-slot.booked {
+    background: #efefef;
+    color: #9a9a9a;
+    border-color: #ddd;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.time-slots-label {
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.otp-section {
+    margin: 10px 0 18px;
+    padding: 16px;
+    background: #f7faf7;
+    border: 1px solid #d9e6dd;
+    border-radius: var(--border-radius);
+}
+
+.otp-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .contact-page {
+        padding-top: 110px;
+    }
+
+    .calendar-days,
+    .time-slots {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+    }
+}
