@@ -5,6 +5,9 @@
     functionBase: '/functions/v1',
     daysToShow: 14,
     timeSlots: [
+      '06:00',
+      '07:00',
+      '08:00',
       '09:00',
       '10:00',
       '11:00',
@@ -12,7 +15,13 @@
       '13:00',
       '14:00',
       '15:00',
-      '16:00'
+      '16:00',
+      '17:00',
+      '18:00',
+      '19:00',
+      '20:00',
+      '21:00',
+      '22:00'
     ]
   };
 
@@ -33,6 +42,21 @@
     bookingTime: document.getElementById('booking_time'),
     submitBookingButton: document.getElementById('submitBookingButton')
   };
+  const fields = {
+    name: document.getElementById('name'),
+    email: document.getElementById('email'),
+    phone: document.getElementById('phone'),
+    service: document.getElementById('service'),
+    privacy: document.getElementById('privacy')
+  };
+  const fieldErrors = {
+    name: document.getElementById('nameError'),
+    email: document.getElementById('emailError'),
+    phone: document.getElementById('phoneError'),
+    service: document.getElementById('serviceError'),
+    bookingSelection: document.getElementById('bookingSelectionError'),
+    privacy: document.getElementById('privacyError')
+  };
 
   function showAlert(message, type) {
     ui.alert.textContent = message;
@@ -42,6 +66,22 @@
   function clearAlert() {
     ui.alert.textContent = '';
     ui.alert.className = 'booking-alert';
+  }
+
+  function setFieldError(input, errorNode, message = '') {
+    if (!input || !errorNode) return;
+    errorNode.textContent = message;
+    input.classList.toggle('is-invalid', Boolean(message));
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+  }
+
+  function clearFieldErrors() {
+    setFieldError(fields.name, fieldErrors.name);
+    setFieldError(fields.email, fieldErrors.email);
+    setFieldError(fields.phone, fieldErrors.phone);
+    setFieldError(fields.service, fieldErrors.service);
+    setFieldError(fields.privacy, fieldErrors.privacy);
+    if (fieldErrors.bookingSelection) fieldErrors.bookingSelection.textContent = '';
   }
 
   function formatDateLabel(date) {
@@ -121,6 +161,7 @@
       button.addEventListener('click', () => {
         state.selectedTime = slot;
         ui.bookingTime.value = slot;
+        if (fieldErrors.bookingSelection) fieldErrors.bookingSelection.textContent = '';
         renderTimeSlotSelection();
       });
 
@@ -138,11 +179,56 @@
   }
 
   function validateFormBasics() {
-    if (!bookingForm.reportValidity()) {
+    clearFieldErrors();
+
+    const fullName = fields.name.value.trim();
+    const email = fields.email.value.trim();
+    const phone = fields.phone.value.trim();
+    const service = fields.service.value;
+    const privacyAccepted = fields.privacy.checked;
+
+    let isValid = true;
+
+    if (!fullName || fullName.split(/\s+/).length < 2) {
+      setFieldError(fields.name, fieldErrors.name, 'Please enter your full name (first and last name).');
+      isValid = false;
+    }
+
+    if (!email) {
+      setFieldError(fields.email, fieldErrors.email, 'Please enter your email so we can send your verification link.');
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFieldError(fields.email, fieldErrors.email, 'Please enter a valid email address.');
+      isValid = false;
+    }
+
+    if (!phone) {
+      setFieldError(fields.phone, fieldErrors.phone, 'Please add a phone number so we can confirm any booking updates.');
+      isValid = false;
+    } else if (phone.replace(/[^\d]/g, '').length < 9) {
+      setFieldError(fields.phone, fieldErrors.phone, 'Please enter a valid phone number (at least 9 digits).');
+      isValid = false;
+    }
+
+    if (!service) {
+      setFieldError(fields.service, fieldErrors.service, 'Please choose a service to continue.');
+      isValid = false;
+    }
+
+    if (!privacyAccepted) {
+      setFieldError(fields.privacy, fieldErrors.privacy, 'Please accept the Privacy Policy to continue.');
+      isValid = false;
+    }
+
+    if (!isValid) {
+      showAlert('Please fix the highlighted fields and try again. We are ready to help.', 'warning');
       return false;
     }
 
     if (!state.selectedDate || !state.selectedTime) {
+      if (fieldErrors.bookingSelection) {
+        fieldErrors.bookingSelection.textContent = 'Please select both a booking date and time slot.';
+      }
       showAlert('Please select both booking date and booking time.', 'error');
       return false;
     }
@@ -206,18 +292,34 @@
     if (!validateFormBasics()) return;
 
     ui.submitBookingButton.disabled = true;
+    ui.submitBookingButton.textContent = 'Sending Link...';
     try {
       const payload = getPayload();
       await callEdgeFunction('send-otp', payload);
       window.location.href = '/thank-you.html?status=verification-sent';
     } catch (error) {
-      showAlert(`Could not submit booking: ${error.message}`, 'error');
+      showAlert(`Could not submit booking: ${error.message}. Please try again or call us on 076 353 1831 for immediate help.`, 'error');
     } finally {
       ui.submitBookingButton.disabled = false;
+      ui.submitBookingButton.textContent = 'Send Verification Link';
     }
   }
 
   ui.submitBookingButton.addEventListener('click', submitBookingForVerification);
+
+  Object.entries(fields).forEach(([fieldName, fieldNode]) => {
+    if (!fieldNode) return;
+    const eventName = fieldNode.type === 'checkbox' || fieldNode.tagName === 'SELECT' ? 'change' : 'input';
+    fieldNode.addEventListener(eventName, () => {
+      const errorNode = fieldErrors[fieldName];
+      if (errorNode && errorNode.textContent) {
+        setFieldError(fieldNode, errorNode);
+      }
+      if (fieldName === 'privacy' && ui.alert.classList.contains('warning')) {
+        clearAlert();
+      }
+    });
+  });
 
   buildCalendarDays();
   loadAvailability();
