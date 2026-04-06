@@ -1579,6 +1579,13 @@ h1, h2, h3, h4 {
     margin-bottom: 20px;
 }
 
+.operating-hours {
+    margin-top: -8px;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    font-weight: 500;
+}
+
 .booking-alert {
     display: none;
     border-radius: var(--border-radius);
@@ -1630,6 +1637,36 @@ h1, h2, h3, h4 {
     color: var(--gray-color);
     margin-bottom: 15px;
     font-size: 0.9rem;
+}
+
+.field-hint {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #5f6c66;
+}
+
+.field-error {
+    min-height: 1.1em;
+    margin-top: 6px;
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    color: #b42318;
+    font-weight: 500;
+}
+
+.form-group input.is-invalid,
+.form-group select.is-invalid {
+    border-color: #d92d20;
+    box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.checkbox-group {
+    flex-wrap: wrap;
 }
 
 .calendar-days,

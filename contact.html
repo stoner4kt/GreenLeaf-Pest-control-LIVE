@@ -12,6 +12,7 @@
     <section class="contact-section">
         <h1>Book a Pest Control Service</h1>
         <p>Select a day and available slot, then check your email for a verification link valid for 3 days.</p>
+        <p class="operating-hours">Operating hours: <strong>6:00 AM - 10:00 PM</strong> (Monday to Sunday)</p>
 
         <div id="bookingAlert" class="booking-alert" role="status" aria-live="polite"></div>
 
@@ -19,16 +20,22 @@
             <div class="form-group">
                 <label for="name">Full Name *</label>
                 <input type="text" id="name" name="name" required autocomplete="name" maxlength="120">
+                <p class="field-hint">Please enter your first and last name so we can confirm your booking quickly.</p>
+                <p class="field-error" id="nameError" aria-live="polite"></p>
             </div>
 
             <div class="form-group">
                 <label for="email">Email Address *</label>
                 <input type="email" id="email" name="email" required autocomplete="email" maxlength="200">
+                <p class="field-hint">We send your secure verification link to this email.</p>
+                <p class="field-error" id="emailError" aria-live="polite"></p>
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone Number *</label>
                 <input type="tel" id="phone" name="phone" required autocomplete="tel" maxlength="30" placeholder="e.g. +27 76 353 1831">
+                <p class="field-hint">Include your best contact number so our team can assist you faster.</p>
+                <p class="field-error" id="phoneError" aria-live="polite"></p>
             </div>
 
             <div class="form-group">
@@ -42,6 +49,7 @@
                     <option value="Ants Extermination">Ants Extermination (R650)</option>
                     <option value="Yard Spraying">Yard Spraying (R800)</option>
                 </select>
+                <p class="field-error" id="serviceError" aria-live="polite"></p>
             </div>
 
             <div class="booking-calendar" aria-labelledby="calendarHeading">
@@ -54,6 +62,7 @@
                     <div id="timeSlots" class="time-slots" role="list"></div>
                 </div>
                 <input type="hidden" id="booking_time" name="booking_time" required>
+                <p class="field-error" id="bookingSelectionError" aria-live="polite"></p>
             </div>
 
             <div class="form-group checkbox-group">
@@ -61,6 +70,7 @@
                 <label for="privacy">
                     I agree to the <a href="privacy-policy.html">Privacy Policy</a>
                 </label>
+                <p class="field-error" id="privacyError" aria-live="polite"></p>
             </div>
 
             <button type="button" id="submitBookingButton" class="btn btn-primary submit-btn">Send Verification Link</button>
