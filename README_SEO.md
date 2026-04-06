@@ -32,7 +32,7 @@ Your website has been fully optimized for:
 
 ### Core Website Files:
 - `index.html` - Main homepage (SEO optimized with full meta tags)
-- `style.css` - Stylesheet (uchanged, working perfectly)
+- `style.css` - Stylesheet (unchanged, working perfectly)
 - `script.js` - JavaScript functionality (unchanged)
 - `images/` - All image files
   - logo.png
