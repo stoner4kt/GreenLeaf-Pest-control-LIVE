@@ -20,17 +20,23 @@ function validEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-async function sha256(value: string) {
-  const bytes = new TextEncoder().encode(value);
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('');
-}
-
-async function sendEmailOtp(toEmail: string, name: string, otp: string, bookingDate: string, bookingTime: string) {
+async function sendVerificationEmail(
+  toEmail: string,
+  name: string,
+  bookingDate: string,
+  bookingTime: string,
+  token: string
+) {
   const resendKey = Deno.env.get('RESEND_API_KEY');
   const fromEmail = Deno.env.get('RESEND_FROM_EMAIL') ?? 'bookings@example.com';
+  const verifyBaseUrl = Deno.env.get('BOOKING_VERIFY_URL');
 
   if (!resendKey) throw new Error('RESEND_API_KEY is missing.');
+
+  if (!verifyBaseUrl) throw new Error('BOOKING_VERIFY_URL is missing.');
+
+  const separator = verifyBaseUrl.includes('?') ? '&' : '?';
+  const verifyLink = `${verifyBaseUrl}${separator}token=${encodeURIComponent(token)}`;
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -41,8 +47,8 @@ async function sendEmailOtp(toEmail: string, name: string, otp: string, bookingD
     body: JSON.stringify({
       from: fromEmail,
       to: [toEmail],
-      subject: 'Your GreenLeaf booking verification code',
-      html: `<p>Hi ${name},</p><p>Your OTP code is <strong>${otp}</strong>.</p><p>Booking slot: ${bookingDate} at ${bookingTime}.</p><p>This code expires in 10 minutes.</p>`
+      subject: 'Verify your GreenLeaf booking',
+      html: `<p>Hi ${name},</p><p>Thanks for your booking request for ${bookingDate} at ${bookingTime}.</p><p>Please verify your booking by clicking the link below (this will instantly confirm your booking):</p><p><a href="${verifyLink}">Verify my booking</a></p><p>This link expires in 3 days.</p>`
     })
   });
 
@@ -86,9 +92,7 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: 'This slot is already booked.' }, 409);
     }
 
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
-    const otpHash = await sha256(otp);
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000).toISOString();
+    const expiresAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
 
     const { data, error } = await supabase
       .from('booking_otps')
@@ -99,7 +103,7 @@ Deno.serve(async (req) => {
         service_type,
         booking_date,
         booking_time,
-        otp_hash: otpHash,
+        otp_hash: 'LINK_VERIFICATION',
         expires_at: expiresAt,
         attempts: 0,
         is_verified: false,
@@ -112,11 +116,10 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: error.message }, 500);
     }
 
-    await sendEmailOtp(email, full_name, otp, booking_date, booking_time);
+    await sendVerificationEmail(email, full_name, booking_date, booking_time, data.otp_token);
 
     return jsonResponse({
-      message: 'OTP sent successfully.',
-      otp_token: data.otp_token
+      message: 'Verification link sent successfully.'
     });
   } catch (error) {
     return jsonResponse({ error: (error as Error).message }, 500);
