@@ -38,7 +38,7 @@ Open **Project Settings → Edge Functions → Secrets** and add:
 - `SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY`
 - `RESEND_API_KEY=YOUR_RESEND_API_KEY`
 - `RESEND_FROM_EMAIL=bookings@yourdomain.com`
-- `BOOKING_VERIFY_URL=https://YOUR_PROJECT.supabase.co/functions/v1/verify-otp`
+- `BOOKING_VERIFY_URL=https://yourdomain.com/thank-you.html`
 - `BOOKING_THANK_YOU_URL=https://yourdomain.com/thank-you.html`
 - `GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/.../exec`
 
@@ -61,7 +61,7 @@ Do not add service role keys to frontend code.
 4. Click **Send Verification Link**.
 5. Confirm redirect to `/thank-you.html?status=verification-sent`.
 6. Open email and click the verification link (valid for 3 days).
-7. Confirm you are redirected back to `thank-you.html` with a verified status and that booking is inserted into spreadsheet.
+7. Confirm `thank-you.html` shows verified status and that booking is inserted into spreadsheet.
 
 ## 8) Double-booking test checklist
 1. Complete one booking for a specific slot.

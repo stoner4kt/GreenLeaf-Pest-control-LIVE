@@ -75,11 +75,18 @@
 (function () {
   const params = new URLSearchParams(window.location.search);
   const status = (params.get('status') || 'verification-sent').trim();
+  const token = (params.get('token') || '').trim();
 
   const icon = document.getElementById('statusIcon');
   const title = document.getElementById('statusTitle');
   const primary = document.getElementById('statusMessagePrimary');
   const secondary = document.getElementById('statusMessageSecondary');
+
+  const CONFIG = {
+    supabaseUrl: 'https://letijupzommtpyhrboho.supabase.co',
+    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldGlqdXB6b21tdHB5aHJib2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NjQyMzMsImV4cCI6MjA5MTA0MDIzM30.JyXGK4D5n1KAiZz6WzCk6hIyQjWScX9x3bGeWBxP3Aw ',
+    functionBase: '/functions/v1'
+  };
 
   const views = {
     'verification-sent': {
@@ -88,6 +95,13 @@
       title: 'Verification Link Sent',
       primary: 'Thank you for choosing GreenLeaf Pest Control.',
       secondary: 'Please check your inbox and click the verification link within 3 days to confirm your booking.'
+    },
+    'verifying': {
+      icon: 'fas fa-spinner fa-spin',
+      iconClass: 'warning-icon',
+      title: 'Verifying Booking…',
+      primary: 'Please wait while we verify your booking link.',
+      secondary: 'Do not close this page.'
     },
     'verified': {
       icon: 'fas fa-check-circle',
@@ -112,12 +126,54 @@
     }
   };
 
-  const view = views[status] || views['verification-sent'];
-  icon.innerHTML = `<i class="${view.icon}"></i>`;
-  icon.className = `success-icon ${view.iconClass}`.trim();
-  title.textContent = view.title;
-  primary.textContent = view.primary;
-  secondary.textContent = view.secondary;
+  function applyStatus(nextStatus) {
+    const view = views[nextStatus] || views['verification-sent'];
+    icon.innerHTML = `<i class="${view.icon}"></i>`;
+    icon.className = `success-icon ${view.iconClass}`.trim();
+    title.textContent = view.title;
+    primary.textContent = view.primary;
+    secondary.textContent = view.secondary;
+  }
+
+  async function verifyTokenFromLink() {
+    applyStatus('verifying');
+
+    try {
+      const endpoint = `${CONFIG.supabaseUrl}${CONFIG.functionBase}/verify-otp`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: CONFIG.supabaseAnonKey,
+          Authorization: `Bearer ${CONFIG.supabaseAnonKey}`
+        },
+        body: JSON.stringify({ otp_token: token })
+      });
+
+      const json = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(json.error || `Request failed (${response.status})`);
+      }
+
+      const normalized = (json.message || '').toLowerCase();
+      if (normalized.includes('already verified')) {
+        applyStatus('already-verified');
+        return;
+      }
+
+      applyStatus('verified');
+    } catch (error) {
+      console.error('Verification failed', error);
+      applyStatus('verification-error');
+    }
+  }
+
+  if (token) {
+    verifyTokenFromLink();
+    return;
+  }
+
+  applyStatus(status);
 })();
 </script>
 

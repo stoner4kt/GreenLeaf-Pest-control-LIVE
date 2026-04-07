@@ -42,21 +42,6 @@
     bookingTime: document.getElementById('booking_time'),
     submitBookingButton: document.getElementById('submitBookingButton')
   };
-  const fields = {
-    name: document.getElementById('name'),
-    email: document.getElementById('email'),
-    phone: document.getElementById('phone'),
-    service: document.getElementById('service'),
-    privacy: document.getElementById('privacy')
-  };
-  const fieldErrors = {
-    name: document.getElementById('nameError'),
-    email: document.getElementById('emailError'),
-    phone: document.getElementById('phoneError'),
-    service: document.getElementById('serviceError'),
-    bookingSelection: document.getElementById('bookingSelectionError'),
-    privacy: document.getElementById('privacyError')
-  };
 
   function showAlert(message, type) {
     ui.alert.textContent = message;
@@ -161,7 +146,6 @@
       button.addEventListener('click', () => {
         state.selectedTime = slot;
         ui.bookingTime.value = slot;
-        if (fieldErrors.bookingSelection) fieldErrors.bookingSelection.textContent = '';
         renderTimeSlotSelection();
       });
 
@@ -292,34 +276,18 @@
     if (!validateFormBasics()) return;
 
     ui.submitBookingButton.disabled = true;
-    ui.submitBookingButton.textContent = 'Sending Link...';
     try {
       const payload = getPayload();
       await callEdgeFunction('send-otp', payload);
       window.location.href = '/thank-you.html?status=verification-sent';
     } catch (error) {
-      showAlert(`Could not submit booking: ${error.message}. Please try again or call us on 076 353 1831 for immediate help.`, 'error');
+      showAlert(`Could not submit booking: ${error.message}`, 'error');
     } finally {
       ui.submitBookingButton.disabled = false;
-      ui.submitBookingButton.textContent = 'Send Verification Link';
     }
   }
 
   ui.submitBookingButton.addEventListener('click', submitBookingForVerification);
-
-  Object.entries(fields).forEach(([fieldName, fieldNode]) => {
-    if (!fieldNode) return;
-    const eventName = fieldNode.type === 'checkbox' || fieldNode.tagName === 'SELECT' ? 'change' : 'input';
-    fieldNode.addEventListener(eventName, () => {
-      const errorNode = fieldErrors[fieldName];
-      if (errorNode && errorNode.textContent) {
-        setFieldError(fieldNode, errorNode);
-      }
-      if (fieldName === 'privacy' && ui.alert.classList.contains('warning')) {
-        clearAlert();
-      }
-    });
-  });
 
   buildCalendarDays();
   loadAvailability();
