@@ -19,10 +19,7 @@
   const state = {
     selectedDate: null,
     selectedTime: null,
-    bookedTimesByDate: {},
-    otpToken: null,
-    otpVerified: false,
-    otpVerifiedAt: null
+    bookedTimesByDate: {}
   };
 
   const bookingForm = document.getElementById('bookingForm');
@@ -34,12 +31,7 @@
     timeSlots: document.getElementById('timeSlots'),
     bookingDate: document.getElementById('booking_date'),
     bookingTime: document.getElementById('booking_time'),
-    sendOtpButton: document.getElementById('sendOtpButton'),
-    otpSection: document.getElementById('otpSection'),
-    otpCode: document.getElementById('otpCode'),
-    verifyOtpButton: document.getElementById('verifyOtpButton'),
-    resendOtpButton: document.getElementById('resendOtpButton'),
-    confirmBookingButton: document.getElementById('confirmBookingButton')
+    submitBookingButton: document.getElementById('submitBookingButton')
   };
 
   function showAlert(message, type) {
@@ -88,8 +80,6 @@
         state.selectedTime = null;
         ui.bookingDate.value = key;
         ui.bookingTime.value = '';
-        state.otpVerified = false;
-        ui.confirmBookingButton.disabled = true;
         renderCalendarDaySelection();
         renderTimeSlots();
       });
@@ -131,8 +121,6 @@
       button.addEventListener('click', () => {
         state.selectedTime = slot;
         ui.bookingTime.value = slot;
-        state.otpVerified = false;
-        ui.confirmBookingButton.disabled = true;
         renderTimeSlotSelection();
       });
 
@@ -213,108 +201,23 @@
     }
   }
 
-  async function sendOtp() {
+  async function submitBookingForVerification() {
     clearAlert();
     if (!validateFormBasics()) return;
 
-    ui.sendOtpButton.disabled = true;
+    ui.submitBookingButton.disabled = true;
     try {
       const payload = getPayload();
-      const result = await callEdgeFunction('send-otp', payload);
-      state.otpToken = result.otp_token;
-      state.otpVerified = false;
-      state.otpVerifiedAt = null;
-      ui.otpSection.hidden = false;
-      showAlert('OTP sent. Please check your email and enter the 6-digit code.', 'success');
+      await callEdgeFunction('send-otp', payload);
+      window.location.href = '/thank-you.html?status=verification-sent';
     } catch (error) {
-      showAlert(`Could not send OTP: ${error.message}`, 'error');
+      showAlert(`Could not submit booking: ${error.message}`, 'error');
     } finally {
-      ui.sendOtpButton.disabled = false;
+      ui.submitBookingButton.disabled = false;
     }
   }
 
-  async function verifyOtp() {
-    clearAlert();
-    const code = (ui.otpCode.value || '').trim();
-    if (!state.otpToken) {
-      showAlert('Please request an OTP first.', 'error');
-      return;
-    }
-
-    if (!/^\d{6}$/.test(code)) {
-      showAlert('Please enter a valid 6-digit OTP.', 'error');
-      return;
-    }
-
-    ui.verifyOtpButton.disabled = true;
-    try {
-      await callEdgeFunction('verify-otp', {
-        otp_token: state.otpToken,
-        otp_code: code
-      });
-      state.otpVerified = true;
-      state.otpVerifiedAt = Date.now();
-      ui.confirmBookingButton.disabled = false;
-      showAlert('OTP verified. You can now confirm your booking.', 'success');
-    } catch (error) {
-      showAlert(`OTP verification failed: ${error.message}`, 'error');
-    } finally {
-      ui.verifyOtpButton.disabled = false;
-    }
-  }
-
-  async function confirmBooking() {
-    clearAlert();
-    if (!validateFormBasics()) return;
-
-    if (!state.otpVerified || !state.otpToken) {
-      showAlert('Please verify OTP before confirming your booking.', 'error');
-      return;
-    }
-
-    ui.confirmBookingButton.disabled = true;
-
-    try {
-      const bookingPayload = {
-        ...getPayload(),
-        otp_token: state.otpToken
-      };
-
-      const bookingResult = await callEdgeFunction('create-booking', bookingPayload);
-
-      try {
-        await callEdgeFunction('send-confirmation-email', {
-          booking_id: bookingResult.booking.id,
-          full_name: bookingResult.booking.full_name,
-          email: bookingResult.booking.email,
-          service_type: bookingResult.booking.service_type,
-          booking_date: bookingResult.booking.booking_date,
-          booking_time: bookingResult.booking.booking_time
-        });
-      } catch (emailError) {
-        console.warn('Booking created but confirmation email failed.', emailError);
-      }
-
-      window.location.href = '/thank-you.html';
-    } catch (error) {
-      showAlert(`Booking failed: ${error.message}`, 'error');
-      await loadAvailability();
-      ui.confirmBookingButton.disabled = false;
-    }
-  }
-
-  ui.sendOtpButton.addEventListener('click', sendOtp);
-  ui.verifyOtpButton.addEventListener('click', verifyOtp);
-  ui.resendOtpButton.addEventListener('click', sendOtp);
-  ui.confirmBookingButton.addEventListener('click', confirmBooking);
-
-  bookingForm.addEventListener('change', () => {
-    if (state.otpVerifiedAt) {
-      state.otpVerified = false;
-      ui.confirmBookingButton.disabled = true;
-      showAlert('Details changed. Please verify OTP again for security.', 'warning');
-    }
-  });
+  ui.submitBookingButton.addEventListener('click', submitBookingForVerification);
 
   buildCalendarDays();
   loadAvailability();

@@ -17,12 +17,11 @@ This guide is written for **Supabase Dashboard deployment first** (no CLI requir
    - `bookings`
 
 ## 3) Add Edge Functions from Dashboard (no CLI)
-Create 5 functions in **Supabase → Edge Functions**:
+Create 4 functions in **Supabase → Edge Functions**:
 - `get-availability`
-- `send-otp`
-- `verify-otp`
-- `create-booking`
-- `send-confirmation-email`
+- `send-otp` (sends 3-day verification link)
+- `verify-otp` (verifies clicked link, creates booking, sends confirmation email, pushes to spreadsheet)
+- `send-confirmation-email` (optional follow-up)
 
 For each function:
 1. Click **New Function**.
@@ -39,6 +38,9 @@ Open **Project Settings → Edge Functions → Secrets** and add:
 - `SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY`
 - `RESEND_API_KEY=YOUR_RESEND_API_KEY`
 - `RESEND_FROM_EMAIL=bookings@yourdomain.com`
+- `BOOKING_VERIFY_URL=https://yourdomain.com/thank-you.html`
+- `BOOKING_THANK_YOU_URL=https://yourdomain.com/thank-you.html`
+- `GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/.../exec`
 
 ## 5) Configure frontend connection
 In `booking.js`, replace:
@@ -52,14 +54,14 @@ Do not add service role keys to frontend code.
 2. Ensure `RESEND_FROM_EMAIL` belongs to that verified domain.
 3. Test outbound mail before production.
 
-## 7) OTP flow test checklist
+## 7) Verification link flow test checklist
 1. Open `contact.html`.
 2. Fill the booking form.
 3. Select date and time.
-4. Click **Send OTP**.
-5. Verify OTP from your inbox.
-6. Click **Confirm Booking**.
-7. Confirm redirect to `/thank-you.html`.
+4. Click **Send Verification Link**.
+5. Confirm redirect to `/thank-you.html?status=verification-sent`.
+6. Open email and click the verification link (valid for 3 days).
+7. Confirm `thank-you.html` shows verified status and that booking is inserted into spreadsheet.
 
 ## 8) Double-booking test checklist
 1. Complete one booking for a specific slot.
@@ -81,6 +83,5 @@ supabase link --project-ref YOUR_PROJECT_REF
 supabase functions deploy get-availability
 supabase functions deploy send-otp
 supabase functions deploy verify-otp
-supabase functions deploy create-booking
 supabase functions deploy send-confirmation-email
 ```

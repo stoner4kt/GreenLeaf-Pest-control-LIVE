@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Book a Service | GreenLeaf Pest Control</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book pest control services with GreenLeaf Pest Control. Select your date and time, verify with OTP, and confirm your booking.">
+    <meta name="description" content="Book pest control services with GreenLeaf Pest Control. Select your date and time, then confirm your booking from the verification link sent to your email.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main class="contact-page">
     <section class="contact-section">
         <h1>Book a Pest Control Service</h1>
-        <p>Select a day and available slot, then verify your email with OTP before final confirmation.</p>
+        <p>Select a day and available slot, then check your email for a verification link valid for 3 days.</p>
 
         <div id="bookingAlert" class="booking-alert" role="status" aria-live="polite"></div>
 
@@ -63,20 +63,7 @@
                 </label>
             </div>
 
-            <button type="button" id="sendOtpButton" class="btn btn-primary submit-btn">Send OTP</button>
-
-            <div id="otpSection" class="otp-section" hidden>
-                <div class="form-group">
-                    <label for="otpCode">Enter OTP sent to your email *</label>
-                    <input type="text" id="otpCode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit OTP">
-                </div>
-                <div class="otp-actions">
-                    <button type="button" id="verifyOtpButton" class="btn btn-secondary">Verify OTP</button>
-                    <button type="button" id="resendOtpButton" class="btn btn-secondary">Resend OTP</button>
-                </div>
-            </div>
-
-            <button type="button" id="confirmBookingButton" class="btn btn-primary submit-btn" disabled>Confirm Booking</button>
+            <button type="button" id="submitBookingButton" class="btn btn-primary submit-btn">Send Verification Link</button>
         </form>
     </section>
 </main>
