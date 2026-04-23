@@ -1,7 +1,7 @@
 (function () {
   const CONFIG = {
     supabaseUrl: 'https://letijupzommtpyhrboho.supabase.co',
-    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldGlqdXB6b21tdHB5aHJib2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NjQyMzMsImV4cCI6MjA5MTA0MDIzM30.JyXGK4D5n1KAiZz6WzCk6hIyQjWScX9x3bGeWBxP3Aw ',
+    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldGlqdXB6b21tdHB5aHJib2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NjQyMzMsImV4cCI6MjA5MTA0MDIzM30.JyXGK4D5n1KAiZz6WzCk6hIyQjWScX9x3bGeWBxP3Aw',
     functionBase: '/functions/v1',
     daysToShow: 14,
     timeSlots: [
