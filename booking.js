@@ -1,10 +1,13 @@
 (function () {
   const CONFIG = {
     supabaseUrl: 'https://letijupzommtpyhrboho.supabase.co',
-    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldGlqdXB6b21tdHB5aHJib2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NjQyMzMsImV4cCI6MjA5MTA0MDIzM30.JyXGK4D5n1KAiZz6WzCk6hIyQjWScX9x3bGeWBxP3Aw ',
+    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldGlqdXB6b21tdHB5aHJib2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NjQyMzMsImV4cCI6MjA5MTA0MDIzM30.JyXGK4D5n1KAiZz6WzCk6hIyQjWScX9x3bGeWBxP3Aw',
     functionBase: '/functions/v1',
     daysToShow: 14,
     timeSlots: [
+      '06:00',
+      '07:00',
+      '08:00',
       '09:00',
       '10:00',
       '11:00',
@@ -12,7 +15,13 @@
       '13:00',
       '14:00',
       '15:00',
-      '16:00'
+      '16:00',
+      '17:00',
+      '18:00',
+      '19:00',
+      '20:00',
+      '21:00',
+      '22:00'
     ]
   };
 
@@ -47,6 +56,22 @@
   function clearAlert() {
     ui.alert.textContent = '';
     ui.alert.className = 'booking-alert';
+  }
+
+  function setFieldError(input, errorNode, message = '') {
+    if (!input || !errorNode) return;
+    errorNode.textContent = message;
+    input.classList.toggle('is-invalid', Boolean(message));
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+  }
+
+  function clearFieldErrors() {
+    setFieldError(fields.name, fieldErrors.name);
+    setFieldError(fields.email, fieldErrors.email);
+    setFieldError(fields.phone, fieldErrors.phone);
+    setFieldError(fields.service, fieldErrors.service);
+    setFieldError(fields.privacy, fieldErrors.privacy);
+    if (fieldErrors.bookingSelection) fieldErrors.bookingSelection.textContent = '';
   }
 
   function formatDateLabel(date) {
@@ -143,11 +168,56 @@
   }
 
   function validateFormBasics() {
-    if (!bookingForm.reportValidity()) {
+    clearFieldErrors();
+
+    const fullName = fields.name.value.trim();
+    const email = fields.email.value.trim();
+    const phone = fields.phone.value.trim();
+    const service = fields.service.value;
+    const privacyAccepted = fields.privacy.checked;
+
+    let isValid = true;
+
+    if (!fullName || fullName.split(/\s+/).length < 2) {
+      setFieldError(fields.name, fieldErrors.name, 'Please enter your full name (first and last name).');
+      isValid = false;
+    }
+
+    if (!email) {
+      setFieldError(fields.email, fieldErrors.email, 'Please enter your email so we can send your verification link.');
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFieldError(fields.email, fieldErrors.email, 'Please enter a valid email address.');
+      isValid = false;
+    }
+
+    if (!phone) {
+      setFieldError(fields.phone, fieldErrors.phone, 'Please add a phone number so we can confirm any booking updates.');
+      isValid = false;
+    } else if (phone.replace(/[^\d]/g, '').length < 9) {
+      setFieldError(fields.phone, fieldErrors.phone, 'Please enter a valid phone number (at least 9 digits).');
+      isValid = false;
+    }
+
+    if (!service) {
+      setFieldError(fields.service, fieldErrors.service, 'Please choose a service to continue.');
+      isValid = false;
+    }
+
+    if (!privacyAccepted) {
+      setFieldError(fields.privacy, fieldErrors.privacy, 'Please accept the Privacy Policy to continue.');
+      isValid = false;
+    }
+
+    if (!isValid) {
+      showAlert('Please fix the highlighted fields and try again. We are ready to help.', 'warning');
       return false;
     }
 
     if (!state.selectedDate || !state.selectedTime) {
+      if (fieldErrors.bookingSelection) {
+        fieldErrors.bookingSelection.textContent = 'Please select both a booking date and time slot.';
+      }
       showAlert('Please select both booking date and booking time.', 'error');
       return false;
     }
