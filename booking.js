@@ -314,10 +314,13 @@
     }
   }
 
-  bookingForm.addEventListener('submit', (event) => {
+  function handleBookingSubmit(event) {
     event.preventDefault();
     submitBookingForVerification();
-  });
+  }
+
+  bookingForm.addEventListener('submit', handleBookingSubmit);
+  ui.submitBookingButton.addEventListener('click', handleBookingSubmit);
 
   buildCalendarDays();
   loadAvailability();
