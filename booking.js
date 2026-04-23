@@ -43,6 +43,11 @@
     submitBookingButton: document.getElementById('submitBookingButton')
   };
 
+  if (!ui.alert || !ui.calendarDays || !ui.timeSlots || !ui.bookingDate || !ui.bookingTime || !ui.submitBookingButton) {
+    console.error('Booking form is missing required UI elements.');
+    return;
+  }
+
   function showAlert(message, type) {
     ui.alert.textContent = message;
     ui.alert.className = `booking-alert ${type}`;
@@ -287,7 +292,10 @@
     }
   }
 
-  ui.submitBookingButton.addEventListener('click', submitBookingForVerification);
+  bookingForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitBookingForVerification();
+  });
 
   buildCalendarDays();
   loadAvailability();
