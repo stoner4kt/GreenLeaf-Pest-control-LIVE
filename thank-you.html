@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Booking Confirmed | GreenLeaf Pest Control</title>
+    <title>Booking Update | GreenLeaf Pest Control</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -10,13 +10,19 @@
         .thank-you-container {
             text-align: center;
             padding: 80px 20px;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
         .success-icon {
             font-size: 80px;
             color: #28a745;
             margin-bottom: 20px;
+        }
+        .warning-icon {
+            color: #f39c12;
+        }
+        .error-icon {
+            color: #dc3545;
         }
         .thank-you-container h1 {
             color: #333;
@@ -26,12 +32,13 @@
             font-size: 1.1rem;
             color: #666;
             line-height: 1.6;
+            margin: 8px 0;
         }
         .home-button {
             display: inline-block;
             margin-top: 30px;
             padding: 12px 30px;
-            background-color: #28a745; /* Adjust to match your GreenLeaf primary color */
+            background-color: #28a745;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -47,13 +54,13 @@
 
 <main>
     <div class="thank-you-container">
-        <div class="success-icon">
+        <div id="statusIcon" class="success-icon">
             <i class="fas fa-check-circle"></i>
         </div>
-        <h1>Request Submitted!</h1>
-        <p>Thank you for choosing <strong>GreenLeaf Pest Control</strong>.</p>
-        <p>We have received your booking details and our team will contact you within 24 hours to confirm your appointment for the requested date.</p>
-        
+        <h1 id="statusTitle">Request Submitted!</h1>
+        <p id="statusMessagePrimary">Thank you for choosing <strong>GreenLeaf Pest Control</strong>.</p>
+        <p id="statusMessageSecondary">We've sent a verification link to your email. Please click it within 3 days to confirm your booking.</p>
+
         <a href="index.html" class="home-button">Return to Homepage</a>
     </div>
 </main>
@@ -63,6 +70,112 @@
         <p>&copy; 2026 GreenLeaf Pest Control. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const status = (params.get('status') || 'verification-sent').trim();
+  const token = (params.get('token') || '').trim();
+
+  const icon = document.getElementById('statusIcon');
+  const title = document.getElementById('statusTitle');
+  const primary = document.getElementById('statusMessagePrimary');
+  const secondary = document.getElementById('statusMessageSecondary');
+
+  const CONFIG = {
+    supabaseUrl: 'https://letijupzommtpyhrboho.supabase.co',
+    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldGlqdXB6b21tdHB5aHJib2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NjQyMzMsImV4cCI6MjA5MTA0MDIzM30.JyXGK4D5n1KAiZz6WzCk6hIyQjWScX9x3bGeWBxP3Aw ',
+    functionBase: '/functions/v1'
+  };
+
+  const views = {
+    'verification-sent': {
+      icon: 'fas fa-paper-plane',
+      iconClass: 'warning-icon',
+      title: 'Verification Link Sent',
+      primary: 'Thank you for choosing GreenLeaf Pest Control.',
+      secondary: 'Please check your inbox and click the verification link within 3 days to confirm your booking.'
+    },
+    'verifying': {
+      icon: 'fas fa-spinner fa-spin',
+      iconClass: 'warning-icon',
+      title: 'Verifying Booking…',
+      primary: 'Please wait while we verify your booking link.',
+      secondary: 'Do not close this page.'
+    },
+    'verified': {
+      icon: 'fas fa-check-circle',
+      iconClass: '',
+      title: 'Booking Confirmed!',
+      primary: 'Your booking has been verified successfully.',
+      secondary: 'A confirmation email has been sent, and your details have been recorded.'
+    },
+    'already-verified': {
+      icon: 'fas fa-check-double',
+      iconClass: '',
+      title: 'Booking Already Confirmed',
+      primary: 'This booking was already verified earlier.',
+      secondary: 'No further action is needed.'
+    },
+    'verification-error': {
+      icon: 'fas fa-times-circle',
+      iconClass: 'error-icon',
+      title: 'Verification Failed',
+      primary: 'We could not verify this booking link.',
+      secondary: 'The link may be expired or invalid. Please submit a new booking request.'
+    }
+  };
+
+  function applyStatus(nextStatus) {
+    const view = views[nextStatus] || views['verification-sent'];
+    icon.innerHTML = `<i class="${view.icon}"></i>`;
+    icon.className = `success-icon ${view.iconClass}`.trim();
+    title.textContent = view.title;
+    primary.textContent = view.primary;
+    secondary.textContent = view.secondary;
+  }
+
+  async function verifyTokenFromLink() {
+    applyStatus('verifying');
+
+    try {
+      const endpoint = `${CONFIG.supabaseUrl}${CONFIG.functionBase}/verify-otp`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: CONFIG.supabaseAnonKey,
+          Authorization: `Bearer ${CONFIG.supabaseAnonKey}`
+        },
+        body: JSON.stringify({ otp_token: token })
+      });
+
+      const json = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(json.error || `Request failed (${response.status})`);
+      }
+
+      const normalized = (json.message || '').toLowerCase();
+      if (normalized.includes('already verified')) {
+        applyStatus('already-verified');
+        return;
+      }
+
+      applyStatus('verified');
+    } catch (error) {
+      console.error('Verification failed', error);
+      applyStatus('verification-error');
+    }
+  }
+
+  if (token) {
+    verifyTokenFromLink();
+    return;
+  }
+
+  applyStatus(status);
+})();
+</script>
 
 </body>
 </html>
