@@ -43,8 +43,30 @@
     submitBookingButton: document.getElementById('submitBookingButton')
   };
 
+  const fields = {
+    name: document.getElementById('name'),
+    email: document.getElementById('email'),
+    phone: document.getElementById('phone'),
+    service: document.getElementById('service'),
+    privacy: document.getElementById('privacy')
+  };
+
+  const fieldErrors = {
+    name: document.getElementById('nameError'),
+    email: document.getElementById('emailError'),
+    phone: document.getElementById('phoneError'),
+    service: document.getElementById('serviceError'),
+    privacy: document.getElementById('privacyError'),
+    bookingSelection: document.getElementById('bookingSelectionError')
+  };
+
   if (!ui.alert || !ui.calendarDays || !ui.timeSlots || !ui.bookingDate || !ui.bookingTime || !ui.submitBookingButton) {
     console.error('Booking form is missing required UI elements.');
+    return;
+  }
+
+  if (!fields.name || !fields.email || !fields.phone || !fields.service || !fields.privacy) {
+    console.error('Booking form is missing required field elements.');
     return;
   }
 
@@ -292,10 +314,13 @@
     }
   }
 
-  bookingForm.addEventListener('submit', (event) => {
+  function handleBookingSubmit(event) {
     event.preventDefault();
     submitBookingForVerification();
-  });
+  }
+
+  bookingForm.addEventListener('submit', handleBookingSubmit);
+  ui.submitBookingButton.addEventListener('click', handleBookingSubmit);
 
   buildCalendarDays();
   loadAvailability();
