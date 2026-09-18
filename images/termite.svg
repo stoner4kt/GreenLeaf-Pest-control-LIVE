@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513"/>
+      <stop offset="100%" style="stop-color:#5D3A1A"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#g)"/>
+  <text x="400" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="72" fill="#F5DEB3">🪵</text>
+  <text x="400" y="300" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#fff" font-weight="bold">Termite Treatment</text>
+  <text x="400" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#F5DEB3">Cape Town · from R1000</text>
+</svg>
