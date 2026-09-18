@@ -31,16 +31,44 @@
             </div>
 
             <div class="form-group">
-                <label for="service">Service Type *</label>
-                <select id="service" name="service" required>
-                    <option value="">Select a service</option>
-                    <option value="Whole House Fumigation">Whole House Fumigation (From-R850)</option>
-                    <option value="Bed Bugs Treatment">Bed Bugs Treatment (From-R750)</option>
-                    <option value="Cockroaches Elimination">Cockroaches Elimination (From-R650)</option>
-                    <option value="Rats / Mice Control">Rats / Mice Control (From-R600)</option>
-                    <option value="Ants Extermination">Ants Extermination (From-R650)</option>
-                    <option value="Yard Spraying">Yard Spraying (From-R800)</option>
-                </select>
+                <fieldset class="service-fieldset">
+                    <legend>Service Type * <span class="hint">(select one or more)</span></legend>
+                    <div class="service-checkboxes" role="group" aria-label="Select services">
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Whole House Fumigation" class="service-checkbox">
+                            Whole House Fumigation (R850)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Bed Bugs Treatment" class="service-checkbox">
+                            Bed Bugs Treatment (R800)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Cockroaches Elimination" class="service-checkbox">
+                            Cockroach Treatment (R750)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Rats / Mice Control" class="service-checkbox">
+                            Rats / Mice Treatment (R800)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Ants Extermination" class="service-checkbox">
+                            Ants Treatment (R850)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Yard Spraying" class="service-checkbox">
+                            Yard Spraying (R800)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Termite Treatment" class="service-checkbox">
+                            Termite Treatment (from R1000)
+                        </label>
+                        <label class="service-check-label">
+                            <input type="checkbox" name="service[]" value="Snake Removal" class="service-checkbox">
+                            Snake Removal (from R1500)
+                        </label>
+                    </div>
+                    <p id="service-error" class="field-error" role="alert" hidden>Please select at least one service.</p>
+                </fieldset>
             </div>
 
             <div class="form-group">
@@ -93,6 +121,8 @@
                 <li role="listitem">Rodent Removal</li>
                 <li role="listitem">Ant Extermination</li>
                 <li role="listitem">Yard Spraying</li>
+                <li role="listitem">Termite Treatment</li>
+                <li role="listitem">Snake Removal</li>
             </ul>
         </div>
         <div class="footer-contact">
@@ -106,5 +136,18 @@
         <p>&copy; 2026 GreenLeaf Pest Control. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="sitemap.xml">Sitemap</a></p>
     </div>
 </footer>
+
+<script>
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  const checks = document.querySelectorAll('input[name="service[]"]:checked');
+  const err = document.getElementById('service-error');
+  if (checks.length === 0) {
+    e.preventDefault();
+    if (err) { err.hidden = false; }
+    return false;
+  }
+  if (err) err.hidden = true;
+});
+</script>
 </body>
 </html>
