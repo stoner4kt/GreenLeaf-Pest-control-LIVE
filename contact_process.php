@@ -5,14 +5,23 @@ $subject = "New Booking Request from GreenLeaf Website";
 $name = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
-$service = trim($_POST['service'] ?? '');
 $date = trim($_POST['service_date'] ?? '');
 $time = trim($_POST['service_time'] ?? '');
 $privacyAccepted = isset($_POST['privacy']);
 
+// Support multi-select checkboxes (service[]) and legacy single service
+$services = [];
+if (isset($_POST['service']) && is_array($_POST['service'])) {
+    $services = array_map('trim', $_POST['service']);
+} elseif (isset($_POST['service']) && is_string($_POST['service'])) {
+    $services = [trim($_POST['service'])];
+}
+$services = array_filter($services);
+$service = implode(', ', $services);
+
 if (!$name || !$email || !$phone || !$service || !$date || !$time || !$privacyAccepted) {
     http_response_code(400);
-    echo "Error: Please complete all required fields.";
+    echo "Error: Please complete all required fields and select at least one service.";
     exit();
 }
 
@@ -26,7 +35,7 @@ $body = "You have received a new booking request:\n\n";
 $body .= "Name: $name\n";
 $body .= "Email: $email\n";
 $body .= "Phone: $phone\n";
-$body .= "Service Requested: $service\n";
+$body .= "Service(s) Requested: $service\n";
 $body .= "Preferred Date: $date\n";
 $body .= "Preferred Time: $time\n";
 
