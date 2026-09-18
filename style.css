@@ -1,6 +1,4 @@
-/* Reset & Base Styles - restored; checkbox styles in css/service-checkboxes.css */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* GreenLeaf styles */
+@import url("css/base-1.css");
+@import url("css/base-2.css");
+@import url("css/service-checkboxes.css");
