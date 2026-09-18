@@ -1,0 +1,63 @@
+/* Multi-service checkbox group on contact form */
+.service-fieldset {
+    border: 1px solid #d9e6dd;
+    border-radius: 8px;
+    padding: 14px 16px 10px;
+    margin: 0;
+}
+
+.service-fieldset legend {
+    font-weight: 600;
+    color: #1e4f2c;
+    padding: 0 6px;
+}
+
+.service-fieldset .hint {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.service-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 8px 16px;
+    margin-top: 8px;
+}
+
+.service-check-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #f7faf7;
+    border: 1px solid #d9e6dd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.service-check-label:hover {
+    background: #eef6ef;
+    border-color: #2a6e3f;
+}
+
+.service-check-label:has(input:checked) {
+    background: #eaf9ef;
+    border-color: #2a6e3f;
+    font-weight: 500;
+}
+
+.service-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #2a6e3f;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+#service-error:not([hidden]) {
+    display: block;
+    margin-top: 10px;
+}
